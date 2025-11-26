@@ -10,8 +10,8 @@ load_dotenv()
 app = Flask(__name__)
 
 # --- Config ---
-BOT_TOKEN = os.getenv("WEBEX_BOT_TOKEN", "")
-BOT_EMAIL = os.getenv("WEBEX_BOT_EMAIL", "")
+BOT_TOKEN = os.getenv("YWJlNmIwMzUtYmFkYS00NDI0LTk0YzctZjJjNmY4NWNhMjczY2JjYjk5MGEtNjg4_P0A1_e58072af-9d57-4b13-abf7-eb3b506c964d", "")
+BOT_EMAIL = os.getenv("myWeather-bot@webex.bot", "")
 NASA_API_KEY = os.getenv("NASA_API_KEY", "DEMO_KEY")
 PORT = int(os.getenv("PORT", "8000"))
 
