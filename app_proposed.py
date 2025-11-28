@@ -30,8 +30,10 @@ WEBEX_API_BASE = "https://webexapis.com/v1"  # change to api-usgov if needed
 # 2. Hard-coded token is created and Bearer is added to meet auth token format
 #######################################################################################
 
+personal_access_token = None
+
 # Hard-coded token (REPLACE token after "Bearer " to use a different token)
-accessToken = "Bearer ZjAzMGVlNGItMjVmZi00MGI2LTk3NDYtYjViMTllNzA2ZmQ3ZjRiODk5NjAtZTM1_P0A1_e58072af-9d57-4b13-abf7-eb3b506c964d"
+accessToken = "Bearer " + personal_access_token
 
 #######################################################################################
 # 3. Provide the URL to the Webex room API.
