@@ -52,37 +52,11 @@ if not r.status_code == 200:
         )
     )
 #######################################################################################
-# 4. Create a loop to print the type and title of each room.
+# 4. Assign roomID to variable.
 #######################################################################################
-#TODO: remove thsi section after we hard code the webex chat room
-print("\nList of available rooms:")
-rooms = r.json()["items"]
-for room in rooms:
-    print("Type: '{}' Name: {}".format(room["type"], room["title"]))
 
-#######################################################################################
-# SEARCH FOR WEBEX ROOM TO MONITOR
-# DO NOT EDIT CODE IN THIS BLOCK
-#######################################################################################
-#TODO: remove thsi section after we hard code the webex chat room
-while True:
-    roomNameToSearch = input("Which room should be monitored for the /seconds messages? ")
-    roomIdToGetMessages = None
+roomIdToGetMessages = "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00vYjZmZjM4NTAtY2IzNS0xMWYwLTkwNWYtZjk4MDg5M2EzNjgw"
 
-    for room in rooms:
-        if room["title"].find(roomNameToSearch) != -1:
-            print("Found rooms with the word " + roomNameToSearch)
-            print(room["title"])
-            roomIdToGetMessages = room["id"]
-            roomTitleToGetMessages = room["title"]
-            print("Found room: " + roomTitleToGetMessages)
-            break
-
-    if roomIdToGetMessages is None:
-        print("Sorry, I didn't find any room with " + roomNameToSearch + " in it.")
-        print("Please try again...")
-    else:
-        break
 
 ######################################################################################
 # WEBEX BOT CODE
