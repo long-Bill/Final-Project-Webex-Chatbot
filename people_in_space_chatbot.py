@@ -26,7 +26,7 @@ WEBEX_API_BASE = "https://webexapis.com/v1"
 # 0. Load environment variables from .env
 #######################################################################################
 
-# This will read a .env file in the same directory as app.py (if present)
+# This will read a .env file in the same directory as people_in_space_chatbot.py (if present)
 load_dotenv()
 
 #######################################################################################
