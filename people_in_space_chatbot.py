@@ -162,60 +162,45 @@ while True:
     ############################################################################
 
     people_api_url = "http://api.open-notify.org/astros.json"
-    r = requests.get(people_api_url)
 
-    if not r.status_code == 200:
-        raise Exception(
-            "Incorrect reply from Open Notify API. Status code: {}. Text: {}".format(
-                r.status_code, r.text
+    try:
+        r = requests.get(people_api_url, timeout=10)
+
+        # Non-200 response
+        if r.status_code != 200:
+            raise Exception(
+                f"Open Notify API returned status {r.status_code}: {r.text}"
             )
-        )
 
-    astros_data = r.json()
+        astros_data = r.json()
 
-    if astros_data.get("message") != "success":
-        raise Exception("Open Notify API returned a non-success message.")
+        if astros_data.get("message") != "success":
+            raise Exception("Open Notify API returned a non-success message.")
 
-    number_in_space = astros_data.get("number", 0)
-    people = astros_data.get("people", [])
+        number_in_space = astros_data.get("number", 0)
+        people = astros_data.get("people", [])
 
-    if number_in_space == 0 or not people:
-        responseMessage = (
-            "According to Open Notify, there are currently no humans in space. 🌍"
-        )
-    else:
-        lines = []
-        for person in people:
-            name = person.get("name", "Unknown")
-            craft = person.get("craft", "Unknown craft")
-            lines.append(f"- {name} ({craft})")
-
-        people_list = "\n".join(lines)
-        responseMessage = (
-            f"There are currently {number_in_space} human(s) in space:\n{people_list}"
-        )
-
-    print("Sending to Webex:\n" + responseMessage)
-
-    HTTPHeaders = {
-        "Authorization": accessToken,
-        "Content-Type": "application/json"
-    }
-
-    PostData = {
-        "roomId": roomIdToGetMessages,
-        "text": responseMessage
-    }
-
-    r = requests.post(
-        f"{WEBEX_API_BASE}/messages",
-        data=json.dumps(PostData),
-        headers=HTTPHeaders
-    )
-    if not r.status_code == 200:
-        raise Exception(
-            "Incorrect reply from Webex API. Status code: {}. Text: {}".format(
-                r.status_code, r.text
+        if number_in_space == 0 or not people:
+            responseMessage = (
+                "According to Open Notify, there are currently no humans in space. 🌍"
             )
+        else:
+            lines = [
+                f"- {person.get('name', 'Unknown')} ({person.get('craft', 'Unknown craft')})"
+                for person in people
+            ]
+            people_list = "\n".join(lines)
+            responseMessage = (
+                f"There are currently {number_in_space} human(s) in space:\n{people_list}"
+            )
+
+    except Exception as e:
+        # Log the error to the console
+        print(f"[ERROR] Could not call Open Notify API: {e}")
+
+        # Create a user-friendly Webex message
+        responseMessage = (
+            "⚠️ Sorry! I couldn't retrieve astronaut data right now. "
+            "The Open Notify API appears to be unavailable. Please try again later."
         )
 
