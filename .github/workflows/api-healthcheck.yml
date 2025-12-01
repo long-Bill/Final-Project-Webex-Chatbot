@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check Open Notify People-In-Space API
+      - name: Check Useless Facts Random Fact API
         id: api_check
         run: |
           echo "Checking https://uselessfacts.jsph.pl/api/v2/facts/random ..."
