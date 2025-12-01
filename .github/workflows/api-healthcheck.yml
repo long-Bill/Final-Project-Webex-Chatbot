@@ -15,9 +15,9 @@ jobs:
       - name: Check Open Notify People-In-Space API
         id: api_check
         run: |
-          echo "Checking http://api.open-notify.org/astros.json ..."
-          STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://api.open-notify.org/astros.json)
-          # use curl -i http://api.open-notify.org/astros.json to print response body for debugging
+          echo "Checking https://uselessfacts.jsph.pl/api/v2/facts/random ..."
+          STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://uselessfacts.jsph.pl/api/v2/facts/random)
+          # use curl -i https://uselessfacts.jsph.pl/api/v2/facts/random to print response body for debugging
 
 
           echo "HTTP status code: $STATUS_CODE"
